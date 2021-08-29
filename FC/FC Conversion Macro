@@ -1,0 +1,51 @@
+Option Explicit
+
+
+Private Sub CommandButton1_Click()
+'ENTER
+Dim Fr As Single
+Dim Cl As Single
+If TextBox1.Value = "" Or CheckBox1 = False And CheckBox2 = False Then
+    MsgBox "PLEASE FILL IN THE INFORMATION", vbOKOnly, "FILL IN THE DATA"
+    Exit Sub
+End If
+
+If Not IsNumeric(TextBox1.Value) Then
+    MsgBox "PLEASE ENTER NUMERIC VALUES ONLY", vbOKOnly, "NUMBERS ONLY"
+    Exit Sub
+End If
+If CheckBox1 = True And CheckBox2 = True Then
+    MsgBox "YOU CAN ONLY CHECK ONE BOX", vbOKOnly, "CHECK ONE"
+    CheckBox1 = False
+    CheckBox2 = False
+    Exit Sub
+End If
+If CheckBox1 = True Then
+    Fr = TextBox1.Value
+    Cl = (Fr - 32) * 5 / 9
+    TextBox2.Value = Cl
+    Beep
+    Exit Sub
+End If
+If CheckBox2 = True Then
+    Cl = TextBox1.Value
+    Fr = (Cl * 9 / 5) + 32
+    TextBox2.Value = Fr
+End If
+  
+End Sub
+
+Private Sub CommandButton2_Click()
+'CLEAR
+TextBox1.Value = ""
+TextBox2.Value = ""
+CheckBox1 = False
+CheckBox2 = False
+End Sub
+
+Private Sub UserForm_Click()
+
+CommandButton1.Caption = "ENTER"
+CommandButton2.Caption = "CLEAR"
+
+End Sub
